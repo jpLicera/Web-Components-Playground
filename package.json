@@ -1,0 +1,20 @@
+{
+  "name": "web-components-playground",
+  "version": "0.0.1",
+  "description": "Primitive Web Component playground",
+  "homepage": "https://github.com/jpLicera/Web-Components-Playground#readme",
+  "bugs": {
+    "url": "https://github.com/jpLicera/Web-Components-Playground/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jpLicera/Web-Components-Playground.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
