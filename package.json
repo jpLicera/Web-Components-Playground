@@ -15,6 +15,10 @@
   "type": "module",
   "main": "index.html",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "compile": "npx tsc -d --outDir ./dist"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.3"
   }
 }
