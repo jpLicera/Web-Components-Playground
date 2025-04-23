@@ -20,5 +20,3 @@ export class TextualThrobber extends HTMLElement {
     console.log(`Attribute ${name} has changed.`);
   }
 }
-
-customElements.define("textual-throbber", TextualThrobber);
