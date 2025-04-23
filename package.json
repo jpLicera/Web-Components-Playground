@@ -1,6 +1,6 @@
 {
   "name": "@local-registry/web-components-playground",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Primitive Web Component playground",
   "homepage": "https://github.com/jpLicera/Web-Components-Playground#readme",
   "bugs": {
@@ -18,5 +18,14 @@
   },
   "devDependencies": {
     "typescript": "^5.8.3"
+  },
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/main.js",
+      "types": "./dist/main.d.ts"
+    }
   }
 }
