@@ -1,6 +1,6 @@
 {
   "name": "@local-registry/web-components-playground",
-  "version": "0.0.30",
+  "version": "0.0.31",
   "description": "Primitive Web Component playground",
   "homepage": "https://github.com/jpLicera/Web-Components-Playground#readme",
   "bugs": {
