@@ -28,9 +28,11 @@ ELEMENT_TEMPLATE.innerHTML = `
       font-size: 1.2rem;
       opacity: 100%;
       transition: opacity 0.5s ease-in-out;
+      pointer-events: auto;
     }
     
     .loading-wrapper--hidden {
+      pointer-events: none;
       opacity: 0;
     }
     
