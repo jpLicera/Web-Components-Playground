@@ -6,7 +6,7 @@ const ELEMENT_TEMPLATE: HTMLTemplateElement = document.createElement('template')
 ELEMENT_TEMPLATE.innerHTML = `
   <div class="loading-wrapper loading-wrapper--hidden">
     <div class="spinner"></div>
-    <p id="message"></p>
+    <p id="message"> </p>
   </div>
   
   <style>
@@ -60,7 +60,11 @@ ELEMENT_TEMPLATE.innerHTML = `
 export class TextualThrobber extends HTMLElement {
   private timerId: number | undefined;
   public intervalMs: number = 2000;
+  /**
+   * Array that hosts all the messages (`string`s) that can be displayed by this element.
+   */
   public messages: string[] = ["Loading...", "Testing...", "Example..."];
+
   private currentMessage: string = this.messages[0];
   private index: number = 0;
 
@@ -71,13 +75,19 @@ export class TextualThrobber extends HTMLElement {
     this.attachShadow({mode: 'open'});
   }
 
-  private initializeDynamicMessage(): void {
-    this.timerId = setInterval(() => {
-      //Update the `index`, resetting back to 0 if necessary.
-      this.index = (this.index + 1) % (this.messages.length);
-      this.currentMessage = this.messages[this.index];
-      this.shadowRoot!.getElementById("message")!.textContent = this.currentMessage;
-    }, this.intervalMs);
+  private initializeTimerId(): void {
+    this.timerId = setInterval(() => this.updateCurrentMessage(), this.intervalMs);
+  }
+
+  /**
+   * Updated the value of the `currentMessage` property, based on the content of the `messages` property.
+   * @see messages
+   */
+  private updateCurrentMessage(): void {
+    //Update the `index`, resetting back to 0 if necessary.
+    this.index = (this.index + 1) % (this.messages.length);
+    this.currentMessage = this.messages[this.index];
+    this.shadowRoot!.getElementById("message")!.textContent = this.currentMessage;
   }
 
   /**
@@ -87,6 +97,8 @@ export class TextualThrobber extends HTMLElement {
    */
   public connectedCallback(): void {
     this.shadowRoot!.appendChild(ELEMENT_TEMPLATE.content.cloneNode(true));
+    //Update the current message to overwrite the default empty value.
+    this.updateCurrentMessage();
   }
 
   /**
@@ -116,7 +128,7 @@ export class TextualThrobber extends HTMLElement {
   public toggleLoading(loading: boolean): void {
     if (loading) {
       this.shadowRoot!.querySelector(".loading-wrapper")!.classList.remove("loading-wrapper--hidden");
-      this.initializeDynamicMessage();
+      this.initializeTimerId();
     } else {
       this.shadowRoot!.querySelector(".loading-wrapper")!.classList.add("loading-wrapper--hidden");
       clearInterval(this.timerId);
