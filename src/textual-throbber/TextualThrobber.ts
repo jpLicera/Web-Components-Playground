@@ -59,16 +59,34 @@ ELEMENT_TEMPLATE.innerHTML = `
   </style>
 `;
 
+/**
+ * A full-screen throbber that features dynamic messages.
+ */
 export class TextualThrobber extends HTMLElement {
+  /**
+   * A unique identifier for the timer created by `setInterval`.
+   * @see setInterval
+   */
   private timerId: number | undefined;
+  /**
+   * The amount of time for which each message is displayed.
+   */
   public intervalMs: number = 2000;
   /**
    * Array that hosts all the messages (`string`s) that can be displayed by this element.
    */
   private _messages: string[] = ["Loading..."];
-
+  /**
+   *
+   * The index of the current message (from `messages`) being displayed.
+   * @see _messages
+   */
   private index: number = 0;
 
+  /**
+   * Property required to respond to attribute changes.
+   * @see {@link https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_custom_elements MDN - Web Components}
+   */
   public static observedAttributes: string[] = ["loading"];
 
   public constructor() {
@@ -81,6 +99,11 @@ export class TextualThrobber extends HTMLElement {
     this.updateCurrentMessage(0);
   }
 
+  /**
+   * Begin looping through the messages contained in `messages`.
+   * Does not reset the `index`, to avoid displaying the same message if multiple loading cycles occur.
+   * @see _messages
+   */
   private initializeTimerId(): void {
     this.timerId = setInterval(() => this.updateCurrentMessage(), this.intervalMs);
   }
@@ -130,6 +153,14 @@ export class TextualThrobber extends HTMLElement {
     this.toggleLoading(newValue === "true");
   }
 
+  /**
+   * Determines whether this element should be displayed or not.
+   * @param loading used to indicate whether the element should be displayed or not.
+   * If `true`, this element is displayed and looping of the messages is started.
+   * If `false`, this element is hidden and the timer created for looping is `cleared`.
+   * @see clearInterval
+   * @see initializeTimerId
+   */
   public toggleLoading(loading: boolean): void {
     if (loading) {
       this.shadowRoot!.querySelector(".loading-wrapper")!.classList.remove("loading-wrapper--hidden");
