@@ -65,16 +65,20 @@ export class TextualThrobber extends HTMLElement {
   /**
    * Array that hosts all the messages (`string`s) that can be displayed by this element.
    */
-  public messages: string[] = ["Loading...", "Testing...", "Example..."];
+  private _messages: string[] = ["Loading..."];
 
-  private currentMessage: string = this.messages[0];
   private index: number = 0;
 
   public static observedAttributes: string[] = ["loading"];
 
-  constructor() {
+  public constructor() {
     super();
     this.attachShadow({mode: 'open'});
+  }
+
+  set messages(value: string[]) {
+    this._messages = value;
+    this.updateCurrentMessage(0);
   }
 
   private initializeTimerId(): void {
@@ -82,14 +86,13 @@ export class TextualThrobber extends HTMLElement {
   }
 
   /**
-   * Updated the value of the `currentMessage` property, based on the content of the `messages` property.
-   * @see messages
+   * Updates the value of the `currentMessage` property, based on the content of the `messages` property.
+   * @see _messages
    */
-  private updateCurrentMessage(): void {
+  private updateCurrentMessage(index ?: number): void {
     //Update the `index`, resetting back to 0 if necessary.
-    this.index = (this.index + 1) % (this.messages.length);
-    this.currentMessage = this.messages[this.index];
-    this.shadowRoot!.getElementById("message")!.textContent = this.currentMessage;
+    this.index = index ?? (this.index + 1) % (this._messages.length);
+    this.shadowRoot!.getElementById("message")!.textContent = this._messages[this.index];
   }
 
   /**
