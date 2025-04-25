@@ -14,3 +14,4 @@ I created this repository to learn the fundamentals of Web Components.
 ## Additional Resources:
 
 * [Web Components on web.dev](https://web.dev/web-components/)
+* [Custom Element Best Practices on web.dev](https://web.dev/articles/custom-elements-best-practices#attributes_and_properties) 
