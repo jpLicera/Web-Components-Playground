@@ -4,23 +4,14 @@
 const ELEMENT_TEMPLATE: HTMLTemplateElement = document.createElement('template');
 
 ELEMENT_TEMPLATE.innerHTML = `
-  <p class="message">
-    <slot></slot>
-  </p>
-  
+  <slot></slot>
   <style>
-    .message {
-      text-align: center;
-      padding: 20px;
-    }
-
-    .message--hidden {
-      display: none;
-    }
-
+  :host {
+    display: none;
+    visibility: hidden;
+  }
   </style>
 `;
-
 
 export class ThrobberMessage extends HTMLElement {
 
@@ -36,5 +27,12 @@ export class ThrobberMessage extends HTMLElement {
    */
   public connectedCallback(): void {
     this.shadowRoot!.appendChild(ELEMENT_TEMPLATE.content.cloneNode(true));
+  }
+
+  /**
+   * Returns the text that defines this message.
+   */
+  get value(): string {
+    return this.textContent ?? "";
   }
 }
