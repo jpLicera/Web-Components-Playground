@@ -10,6 +10,9 @@ ELEMENT_TEMPLATE.innerHTML = `
   </div>
   
   <style>
+    :host {
+      position: absolute;
+    }
     .loading-wrapper {
       --accent-color: #00ffcc;
       position: fixed;
