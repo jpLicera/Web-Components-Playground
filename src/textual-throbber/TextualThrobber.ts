@@ -1,3 +1,5 @@
+import {ThrobberMessage} from "../throbber-message/ThrobberMessage";
+
 /**
  * `template` element used to populate the shadow DOM.
  */
@@ -7,12 +9,14 @@ ELEMENT_TEMPLATE.innerHTML = `
   <div class="loading-wrapper loading-wrapper--hidden">
     <div class="spinner"></div>
     <p id="message"> </p>
+    <slot id="slot"></slot> 
   </div>
   
   <style>
     :host {
       position: absolute;
     }
+
     .loading-wrapper {
       --accent-color: #00ffcc;
       position: fixed;
@@ -78,11 +82,11 @@ export class TextualThrobber extends HTMLElement {
   /**
    * Array that hosts all the messages (`string`s) that can be displayed by this element.
    */
-  private _messages: string[] = ["Loading..."];
+  private messages: string[] = [];
   /**
    *
    * The index of the current message (from `messages`) being displayed.
-   * @see _messages
+   * @see messages
    */
   private index: number = 0;
 
@@ -95,17 +99,14 @@ export class TextualThrobber extends HTMLElement {
   public constructor() {
     super();
     this.attachShadow({mode: 'open'});
-  }
-
-  set messages(value: string[]) {
-    this._messages = value;
-    this.updateCurrentMessage(0);
+    this.shadowRoot!.appendChild(ELEMENT_TEMPLATE.content.cloneNode(true));
+    this.initializeEventListeners();
   }
 
   /**
    * Begin looping through the messages contained in `messages`.
    * Does not reset the `index`, to avoid displaying the same message if multiple loading cycles occur.
-   * @see _messages
+   * @see messages
    */
   private initializeTimerId(): void {
     this.timerId = setInterval(() => this.updateCurrentMessage(), this.intervalMs);
@@ -113,23 +114,32 @@ export class TextualThrobber extends HTMLElement {
 
   /**
    * Updates the value of the `currentMessage` property, based on the content of the `messages` property.
-   * @see _messages
+   * @see messages
    */
   private updateCurrentMessage(index ?: number): void {
     //Update the `index`, resetting back to 0 if necessary.
-    this.index = index ?? (this.index + 1) % (this._messages.length);
-    this.shadowRoot!.getElementById("message")!.textContent = this._messages[this.index];
+    this.index = index ?? (this.index + 1) % (this.messages.length);
+    this.shadowRoot!.getElementById("message")!.textContent = this.messages[this.index];
   }
 
   /**
-   * Lifecycle method that is called when this element is added to the document's DOM.
-   * Appends a clone of this template's template to the shadow DOM.
-   * @see ELEMENT_TEMPLATE
+   * Appends every eventListener required by the functionalities offered by this element.
    */
-  public connectedCallback(): void {
-    this.shadowRoot!.appendChild(ELEMENT_TEMPLATE.content.cloneNode(true));
-    //Update the current message to overwrite the default empty value.
-    this.updateCurrentMessage();
+  private initializeEventListeners(): void {
+    const slotElement: HTMLSlotElement = this.shadowRoot!.getElementById("slot") as HTMLSlotElement;
+    slotElement.addEventListener("slotchange", () => this.updateMessagesFromSlot(slotElement));
+  }
+
+  /**
+   * Updates the value of the `messages` property with the `value`s acquired from the `throbber-message` elements found within this element.
+   * Additionally, updates the current message being displayed.
+   * @see messages
+   * @see ThrobberMessage
+   */
+  private updateMessagesFromSlot(slotElement: HTMLSlotElement): void {
+    const messageElements: ThrobberMessage[] = slotElement!.assignedNodes() as ThrobberMessage[];
+    this.messages = messageElements.map((e: ThrobberMessage) => e.value);
+    this.updateCurrentMessage(0);
   }
 
   /**
@@ -152,7 +162,6 @@ export class TextualThrobber extends HTMLElement {
    * @see observedAttributes
    */
   public attributeChangedCallback(name: string, oldValue: string, newValue: string): void {
-    console.log(`Attribute ${name} has changed: ${oldValue} -> ${newValue}`);
     this.toggleLoading(newValue === "true");
   }
 
