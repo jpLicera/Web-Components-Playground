@@ -13,6 +13,9 @@ ELEMENT_TEMPLATE.innerHTML = `
   </style>
 `;
 
+/**
+ * Element that contains the message to be displayed in a `textual-throbber` element.
+ */
 export class ThrobberMessage extends HTMLElement {
 
   public constructor() {
@@ -22,7 +25,7 @@ export class ThrobberMessage extends HTMLElement {
 
   /**
    * Lifecycle method that is called when this element is added to the document's DOM.
-   * Appends a clone of this template's template to the shadow DOM.
+   * Appends a clone of the template to the shadow DOM.
    * @see ELEMENT_TEMPLATE
    */
   public connectedCallback(): void {
