@@ -4,26 +4,12 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Web Components Playground</title>
-		<script type="module" src="./registerComponents.js"></script>
-		<script type="module">
+		<script type="module" blocking="render">
 			import {registerComponents} from './registerComponents.js';
 			registerComponents();
 		</script>
 	</head>
 	<body style="display: flex; justify-content: center; align-items: center;">
-		<script type="module">
-			const throbber = document.getElementById('throbber');
-			setInterval(() => {
-				if (throbber.hasAttribute("loading")) {
-					throbber.removeAttribute("loading");
-					return;
-				}
-
-				throbber.setAttribute("loading", "true");
-			}, 5000);
-
-		</script>
-
 		<textual-throbber id="throbber" loading="true">
 			<throbber-message>Summoning mystical unicorns...</throbber-message>
 			<throbber-message>Brewing magical coffee...</throbber-message>
@@ -76,5 +62,17 @@
 			Suspendisse pulvinar, augue ac venenatis condimentum, sem libero volutpat nibh, nec pellentesque velit pede quis nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Fusce id purus. Ut varius tincidunt libero. Phasellus dolor. Maecenas vestibulum mollis
 
 		</p>
+		<script>
+			const throbber = document.getElementById('throbber');
+			setInterval(() => {
+				if (throbber.hasAttribute("loading")) {
+					throbber.removeAttribute("loading");
+					return;
+				}
+
+				throbber.setAttribute("loading", "true");
+			}, 5000);
+
+		</script>
 	</body>
 </html>
