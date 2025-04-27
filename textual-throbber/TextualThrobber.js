@@ -128,7 +128,7 @@ export class TextualThrobber extends HTMLElement {
      */
     updateMessagesFromSlot(slotElement) {
         const messageElements = slotElement.assignedNodes();
-        this.messages = messageElements.map((e) => e.value);
+        this.messages = messageElements.filter((e) => e.value && e.value.trim().length > 0).map((e) => e.value);
         this.updateCurrentMessage(0);
     }
     /**
