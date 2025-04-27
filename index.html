@@ -27,7 +27,7 @@
 		</style>
 	</head>
 	<body>
-		<textual-throbber id="throbber" loading="true">
+		<textual-throbber id="throbber">
 			<throbber-message>Summoning mystical unicorns...</throbber-message>
 			<throbber-message>Brewing magical coffee...</throbber-message>
 			<throbber-message>Teaching robots to dance...</throbber-message>
@@ -81,15 +81,20 @@
 		</p>
 		<script>
 			const throbber = document.getElementById('throbber');
-			setInterval(() => {
-				if (throbber.hasAttribute("loading")) {
-					throbber.removeAttribute("loading");
-					return;
-				}
 
+			//Begin loading after 2 seconds. After that, loop infinitely, toggling every 10 seconds.
+			setTimeout(() => {
 				throbber.setAttribute("loading", "true");
-			}, 5000);
 
+				setInterval(() => {
+					if (throbber.hasAttribute("loading")) {
+						throbber.removeAttribute("loading");
+						return;
+					}
+
+					throbber.setAttribute("loading", "true");
+				}, 10000);
+			}, 2000)
 		</script>
 	</body>
 </html>
