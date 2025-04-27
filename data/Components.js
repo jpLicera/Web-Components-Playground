@@ -1,5 +1,5 @@
-import { TextualThrobber } from "../textual-throbber/TextualThrobber";
-import { ThrobberMessage } from "../throbber-message/ThrobberMessage";
+import { TextualThrobber } from "../textual-throbber/TextualThrobber.js";
+import { ThrobberMessage } from "../throbber-message/ThrobberMessage.js";
 /**
  * An array of all the `CustomComponents` defined in this package.
  * @see CustomComponent
