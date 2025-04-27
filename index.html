@@ -6,7 +6,10 @@
 		<script type="module" src="./registerComponents.js"></script>
 	</head>
 	<body>
-		<script>registerComponents()</script>
+		<script type="module">
+			import {registerComponents} from './registerComponents.js';
+			registerComponents();
+		</script>
 
 		<textual-throbber loading="true">
 			<throbber-message>Summoning mystical unicorns...</throbber-message>
