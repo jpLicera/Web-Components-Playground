@@ -23,7 +23,7 @@ This section features a list of examples of how each Web Component implemented i
 ## Textual throbber
 This element consists of a full-screen throbber (loading icon) accompanied by a changing message.
 
-The following snippet:
+The following snippet shows how it would be used:
 
 ```html
 <textual-throbber loading="true">
@@ -35,4 +35,9 @@ The following snippet:
 </textual-throbber>
 ```
 
-Produces the following result:
+* The `loading` attribute must be dynamically updated.
+* The messages displayed by this element must be passed uing a `throbber-message` element.
+  * Empty `throbber-message`s are ignored.
+  * Messages are displayed in the order in which they are passed.
+  
+A live example can be found [here](https://jplicera.github.io/Web-Components-Playground/).
