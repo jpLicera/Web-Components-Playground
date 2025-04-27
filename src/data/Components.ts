@@ -1,6 +1,6 @@
-import {CustomComponent} from "../interfaces/CustomComponent";
-import {TextualThrobber} from "../textual-throbber/TextualThrobber";
-import {ThrobberMessage} from "../throbber-message/ThrobberMessage";
+import {CustomComponent} from "../interfaces/CustomComponent.ts";
+import {TextualThrobber} from "../textual-throbber/TextualThrobber.ts";
+import {ThrobberMessage} from "../throbber-message/ThrobberMessage.ts";
 
 /**
  * An array of all the `CustomComponents` defined in this package.

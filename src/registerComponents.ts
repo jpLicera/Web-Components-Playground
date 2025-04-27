@@ -1,4 +1,4 @@
-import {COMPONENTS} from "./data/Components";
+import {COMPONENTS} from "./data/Components.ts";
 
 /**
  * Registers all the web components defined in `COMPONENTS`

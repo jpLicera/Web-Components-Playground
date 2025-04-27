@@ -1,4 +1,4 @@
-import {ThrobberMessage} from "../throbber-message/ThrobberMessage";
+import {ThrobberMessage} from "../throbber-message/ThrobberMessage.ts";
 
 /**
  * `template` element used to populate the shadow DOM.
