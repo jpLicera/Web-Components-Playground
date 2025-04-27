@@ -171,3 +171,4 @@ export class TextualThrobber extends HTMLElement {
         }
     }
 }
+//# sourceMappingURL=TextualThrobber.js.map

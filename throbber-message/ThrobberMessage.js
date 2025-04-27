@@ -34,3 +34,4 @@ export class ThrobberMessage extends HTMLElement {
         return this.textContent ?? "";
     }
 }
+//# sourceMappingURL=ThrobberMessage.js.map

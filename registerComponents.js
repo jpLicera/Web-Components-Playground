@@ -8,3 +8,4 @@ export function registerComponents() {
         customElements.define(component.name, component.constructor);
     }
 }
+//# sourceMappingURL=registerComponents.js.map
