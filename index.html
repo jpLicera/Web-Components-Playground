@@ -13,20 +13,19 @@
 			registerComponents();
 
 			const throbber = document.getElementById('throbber');
-			throbber.setAttribute("loading", "true");
 
 			setInterval(() => {
 				if (throbber.hasAttribute("loading")) {
-					throbber.setAttribute("loading", "false");
+					throbber.removeAttribute("loading");
 					return;
 				}
 
 				throbber.setAttribute("loading", "true");
-			}, 10000);
+			}, 5000);
 
 		</script>
 
-		<textual-throbber id="throbber">
+		<textual-throbber id="throbber" loading="true">
 			<throbber-message>Summoning mystical unicorns...</throbber-message>
 			<throbber-message>Brewing magical coffee...</throbber-message>
 			<throbber-message>Teaching robots to dance...</throbber-message>
