@@ -1,6 +1,6 @@
 {
   "name": "@local-registry/web-components-playground",
-  "version": "0.0.62",
+  "version": "0.0.63",
   "description": "Primitive Web Component playground",
   "homepage": "https://github.com/jpLicera/Web-Components-Playground#readme",
   "bugs": {
@@ -13,7 +13,6 @@
   },
   "license": "ISC",
   "type": "module",
-  "main": "index.html",
   "scripts": {
     "compile": "npx tsc -d --outDir ./dist"
   },
