@@ -3,6 +3,6 @@
  * @see customElements#define
  */
 export interface CustomComponent {
-  readonly name: string;
-  readonly constructor: CustomElementConstructor;
+    readonly name: string;
+    readonly constructor: CustomElementConstructor;
 }
