@@ -6,10 +6,27 @@
 		<title>Web Components Playground</title>
 		<script type="module" blocking="render">
 			import {registerComponents} from './registerComponents.js';
+
 			registerComponents();
 		</script>
+		<style>
+			body {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+
+			p {
+				padding: 240px 460px;
+				font-size: 20px;
+			}
+
+			*:not(:defined) {
+				display: none;
+			}
+		</style>
 	</head>
-	<body style="display: flex; justify-content: center; align-items: center;">
+	<body>
 		<textual-throbber id="throbber" loading="true">
 			<throbber-message>Summoning mystical unicorns...</throbber-message>
 			<throbber-message>Brewing magical coffee...</throbber-message>
@@ -18,7 +35,7 @@
 			<throbber-message>Untangling virtual spaghetti...</throbber-message>
 		</textual-throbber>
 
-		<p style="padding: 240px 460px; font-size: 20px;">
+		<p>
 			Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.
 
 			Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.
