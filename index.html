@@ -5,15 +5,14 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Web Components Playground</title>
 		<script type="module" src="./registerComponents.js"></script>
+		<script type="module">
+			import {registerComponents} from './registerComponents.js';
+			registerComponents();
+		</script>
 	</head>
 	<body style="display: flex; justify-content: center; align-items: center;">
 		<script type="module">
-			import {registerComponents} from './registerComponents.js';
-
-			registerComponents();
-
 			const throbber = document.getElementById('throbber');
-
 			setInterval(() => {
 				if (throbber.hasAttribute("loading")) {
 					throbber.removeAttribute("loading");
